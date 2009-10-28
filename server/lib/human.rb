@@ -29,7 +29,8 @@ class Human < Actor
 
   def send_request(env)
     perf('sending request') do
-      brain.post '/', env.to_json, {'Content-Type' => 'application/json'}
+      puts env.to_json.length
+      # brain.post '/', env.to_json, {'Content-Type' => 'application/json'}
     end
   end
 
@@ -41,10 +42,10 @@ class Human < Actor
   end
 
   def normalize_response(response)
-    raise Patron::ConnectionFailed unless response.status == 200
-    raise ArgumentError if response.body.length > MAX_RESPONSE_LENGTH
+    # raise Patron::ConnectionFailed unless response.status == 200
+    # raise ArgumentError if response.body.length > MAX_RESPONSE_LENGTH
 
-    validate_response JSON.parse(response.body)
+    validate_response JSON.parse("{}")
   end
 
   def validate_response(json)
