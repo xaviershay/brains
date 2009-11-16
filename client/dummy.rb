@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'json'
+require 'dnssd'
 
 require '../server/lib/core_ext'
 
@@ -43,4 +44,9 @@ post '/' do
   else
     json :action => 'idle'
   end
+end
+
+# TODO: How to know which port to advertise on?
+DNSSD.register('brains', "_brains._tcp", 'local', 4567) do |rr|
+  puts "LETS KILL SOME ZOMBIES"
 end
